@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="LEO Fashions – Premium Men's Streetwear & Fashion. Kammanahalli & Yeshwanthpur, Bengaluru."/>
+<title>LEO Fashions — Premium Menswear, Bengaluru</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#080808;--black2:#0f0f0f;--black3:#161616;--black4:#1e1e1e;--black5:#262626;
+  --chrome:#e2e2e2;--silver:#b8b8b8;--silver-mid:#888;--silver-dim:#555;
+  --red:#d42b2b;--red-glow:rgba(212,43,43,.35);--red-dim:rgba(212,43,43,.12);
+  --glass:rgba(255,255,255,.04);--gb:rgba(255,255,255,.09);--glass-h:rgba(255,255,255,.07);
+  --fs-hero:clamp(5rem,15vw,13rem);--fs-h1:clamp(2.8rem,6.5vw,6.5rem);
+  --fs-h2:clamp(1.9rem,4vw,4rem);--fs-body:clamp(.85rem,1.4vw,1rem);
+  --fs-sm:clamp(.65rem,1.1vw,.75rem);--fs-lbl:clamp(.55rem,.95vw,.68rem);
+  --px:clamp(20px,5vw,72px);--ps:clamp(60px,8vw,110px);--gap:clamp(8px,1.5vw,16px);
+  --ease:cubic-bezier(.16,1,.3,1);--fast:.2s ease;--med:.4s var(--ease);--slow:.7s var(--ease);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--black);color:var(--chrome);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+/* SMOOTH IMG LOAD */
+img{display:block;max-width:100%;transition:opacity .4s ease}
+img.loading{opacity:0}
+img.loaded{opacity:1}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--silver-dim);border-radius:2px}
+
+/* CURSOR */
+#cur,#cur-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);will-change:left,top}
+#cur{width:8px;height:8px;background:var(--chrome);mix-blend-mode:difference;transition:width var(--fast),height var(--fast)}
+#cur-ring{width:32px;height:32px;border:1px solid rgba(200,200,200,.3);transition:width .25s var(--ease),height .25s var(--ease),border-color .25s}
+body.hov #cur{width:16px;height:16px}
+body.hov #cur-ring{width:52px;height:52px;border-color:rgba(200,200,200,.6)}
+
+/* UTILS */
+.lbl{display:inline-flex;align-items:center;gap:10px;font-size:var(--fs-lbl);letter-spacing:.28em;text-transform:uppercase;color:var(--silver-mid);font-weight:500}
+.lbl::before{content:'';display:inline-block;width:22px;height:1px;background:var(--red);flex-shrink:0}
+.sh{font-family:'Bebas Neue',sans-serif;font-size:var(--fs-h2);letter-spacing:.05em;line-height:.95;background:linear-gradient(160deg,#e8e8e8 0%,#999 60%,#d0d0d0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.btn-p{display:inline-flex;align-items:center;gap:10px;background:var(--chrome);color:var(--black);font-size:var(--fs-lbl);letter-spacing:.2em;text-transform:uppercase;font-weight:600;padding:clamp(12px,2vw,16px) clamp(20px,3.5vw,36px);border:none;position:relative;overflow:hidden;transition:background var(--fast),transform var(--fast)}
+.btn-p::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.25);transform:translateX(-105%) skewX(-12deg);transition:transform .5s var(--ease)}
+.btn-p:hover::after{transform:translateX(105%) skewX(-12deg)}
+.btn-p:hover{background:#fff;transform:translateY(-2px)}
+.btn-g{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--silver);font-size:var(--fs-lbl);letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:clamp(11px,2vw,15px) clamp(18px,3vw,32px);border:1px solid var(--gb);transition:border-color var(--fast),color var(--fast),transform var(--fast)}
+.btn-g:hover{border-color:var(--silver);color:var(--chrome);transform:translateY(-2px)}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.sec-hd{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(28px,4.5vw,52px);flex-wrap:wrap}
+.val{display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-lbl);letter-spacing:.2em;text-transform:uppercase;color:var(--silver-mid);font-weight:500;transition:color var(--fast),gap var(--fast);white-space:nowrap}
+.val:hover{color:var(--chrome);gap:14px}
+
+/* ANNOUNCE BAR */
+.abar{background:var(--red);padding:9px var(--px);text-align:center;font-size:var(--fs-lbl);letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:#fff;position:relative;z-index:200;transition:transform .4s ease}
+.abar span{opacity:.65;margin:0 14px}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 var(--px);height:68px;transition:background .5s,border-color .5s,height .3s,top .4s ease;border-bottom:1px solid transparent}
+.nav.sticky{background:rgba(8,8,8,.94);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-color:var(--gb);height:60px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-mars{font-size:clamp(1.1rem,2.5vw,1.6rem);color:var(--silver-mid);line-height:1}
+.logo-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,3.5vw,2rem);letter-spacing:.14em;background:linear-gradient(135deg,#e8e8e8 0%,#888 50%,#e0e0e0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.logo-sub{display:block;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--silver-dim);font-weight:500;margin-top:-3px}
+.nav-links{display:flex;gap:clamp(20px,3.5vw,44px);list-style:none}
+.nav-links a{font-size:var(--fs-lbl);letter-spacing:.2em;text-transform:uppercase;color:var(--silver-mid);font-weight:500;position:relative;padding-bottom:3px;transition:color var(--fast)}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--chrome);transition:width var(--med)}
+.nav-links a:hover{color:var(--chrome)}
+.nav-links a:hover::after{width:100%}
+.nav-r{display:flex;align-items:center;gap:16px}
+.nav-call{display:flex;align-items:center;gap:7px;font-size:var(--fs-lbl);letter-spacing:.15em;text-transform:uppercase;color:var(--black);background:var(--chrome);font-weight:600;padding:9px 20px;border:none;transition:background var(--fast),transform var(--fast);white-space:nowrap}
+.nav-call:hover{background:#fff;transform:translateY(-1px)}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
+.ham span{display:block;width:22px;height:1.5px;background:var(--silver);transition:transform var(--med),opacity var(--fast)}
+.mmenu{position:fixed;inset:0;background:var(--black);z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;transform:translateX(100%);transition:transform var(--med)}
+.mmenu.open{transform:translateX(0)}
+.mmenu a{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,10vw,4rem);letter-spacing:.1em;color:var(--silver-mid);transition:color var(--fast)}
+.mmenu a:hover{color:var(--chrome)}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;padding-top:68px}
+.hero-mesh{position:absolute;inset:0;background:radial-gradient(ellipse 55% 50% at 75% 55%,rgba(212,43,43,.07) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 25% 40%,rgba(180,180,180,.04) 0%,transparent 60%),linear-gradient(175deg,#0f0e0e 0%,#080808 50%,#0d0c0b 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)}
+.hero-scan{position:absolute;inset:0;background:linear-gradient(to right,transparent 0%,rgba(255,255,255,.018) 48%,rgba(255,255,255,.05) 50%,rgba(255,255,255,.018) 52%,transparent 100%);animation:scan 8s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translateX(-120%)}50%{transform:translateX(120%)}}
+.hero-c{position:relative;z-index:2;width:100%;padding:clamp(24px,4vw,60px) var(--px);display:grid;grid-template-columns:1fr auto;align-items:end;gap:var(--gap);max-width:1600px;margin:0 auto}
+.hero-l{max-width:860px}
+.hero-ey{display:flex;align-items:center;gap:12px;margin-bottom:clamp(16px,3vw,28px);animation:hrev .7s .1s var(--ease) both}
+.hey-line{display:inline-block;width:40px;height:1px;background:var(--red)}
+.hey-text{font-size:var(--fs-lbl);letter-spacing:.3em;text-transform:uppercase;color:var(--silver-mid);font-weight:500}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:var(--fs-hero);line-height:.88;letter-spacing:.03em;animation:hrev .8s .2s var(--ease) both}
+.hero-title .s{background:linear-gradient(155deg,#f0f0f0 0%,#aaa 45%,#e8e8e8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.hero-title .o{-webkit-text-stroke:1.5px rgba(180,180,180,.4);-webkit-text-fill-color:transparent;display:block}
+.hero-desc{font-size:clamp(.9rem,1.8vw,1.1rem);color:var(--silver-mid);font-weight:300;max-width:440px;line-height:1.7;margin-top:clamp(14px,2.5vw,22px);animation:hrev .8s .35s var(--ease) both}
+.hero-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(24px,4vw,40px);animation:hrev .8s .5s var(--ease) both}
+.hero-r{display:flex;flex-direction:column;gap:10px;align-self:center;animation:hrev .9s .55s var(--ease) both}
+.stat{background:var(--glass);border:1px solid var(--gb);backdrop-filter:blur(12px);padding:16px 22px;min-width:180px;transition:background var(--fast),border-color var(--fast),transform var(--fast)}
+.stat:hover{background:var(--glass-h);border-color:rgba(255,255,255,.18);transform:translateX(-4px)}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:.06em;background:linear-gradient(135deg,#e0e0e0,#888);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.stat-l{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--silver-dim);margin-top:3px}
+.hero-scroll{position:absolute;bottom:clamp(20px,4vw,36px);left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;animation:hrev 1s .9s var(--ease) both}
+.sdot{width:20px;height:34px;border:1px solid var(--gb);border-radius:10px;position:relative}
+.sdot::after{content:'';position:absolute;top:5px;left:50%;transform:translateX(-50%);width:3px;height:6px;background:var(--silver-dim);border-radius:2px;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{top:5px;opacity:1}70%{top:18px;opacity:0}}
+.stext{font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;color:var(--silver-dim)}
+@keyframes hrev{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* MARQUEE */
+.mq-wrap{border-top:1px solid var(--gb);border-bottom:1px solid var(--gb);background:var(--black2);overflow:hidden}
+.mq-row{display:flex;overflow:hidden;padding:12px 0;border-bottom:1px solid var(--gb)}
+.mq-row:last-child{border-bottom:none}
+.mq-track{display:flex;white-space:nowrap;flex-shrink:0}
+.mq-row:nth-child(1) .mq-track{animation:mL 20s linear infinite}
+.mq-row:nth-child(2) .mq-track{animation:mR 18s linear infinite}
+.mq-item{display:inline-flex;align-items:center;gap:20px;padding:0 28px;font-size:var(--fs-lbl);letter-spacing:.24em;text-transform:uppercase;color:var(--silver-dim);font-weight:500}
+.mq-dot{width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0}
+.mq-item.hi{color:var(--silver)}
+@keyframes mL{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+/* CATEGORIES */
+.cats{padding:var(--ps) var(--px);background:var(--black)}
+.cat-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(2,clamp(160px,22vw,300px));gap:clamp(6px,1vw,10px)}
+.cc{position:relative;overflow:hidden;background:var(--black3);display:flex;align-items:flex-end;cursor:pointer;transition:transform .45s var(--ease)}
+.cc:hover{transform:scale(1.012);z-index:2}
+.cc:nth-child(1){grid-column:1/6;grid-row:1/3}
+.cc:nth-child(2){grid-column:6/9;grid-row:1/2}
+.cc:nth-child(3){grid-column:9/13;grid-row:1/2}
+.cc:nth-child(4){grid-column:6/9;grid-row:2/3}
+.cc:nth-child(5){grid-column:9/13;grid-row:2/3}
+.cc:nth-child(1){background:linear-gradient(160deg,#161410,#0e0c0a)}
+.cc:nth-child(2){background:linear-gradient(160deg,#121218,#0c0c16)}
+.cc:nth-child(3){background:linear-gradient(160deg,#141616,#0c1010)}
+.cc:nth-child(4){background:linear-gradient(160deg,#161212,#120c0c)}
+.cc:nth-child(5){background:linear-gradient(160deg,#161614,#100f0a)}
+.cc-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(3rem,8vw,7rem);opacity:.07;user-select:none;filter:grayscale(1);transition:opacity .4s,transform .6s var(--ease)}
+.cc:hover .cc-art{opacity:.13;transform:scale(1.08)}
+.cc-stripe{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 7px,rgba(255,255,255,.018) 7px,rgba(255,255,255,.018) 8px)}
+.cc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.3) 40%,transparent 70%);transition:opacity .4s}
+.cc-bdg{position:absolute;top:14px;right:14px;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;font-weight:600}
+.bdg-hot{background:var(--red);color:#fff}
+.bdg-rr{background:transparent;border:1px solid rgba(200,200,200,.3);color:var(--silver)}
+.bdg-bs{background:var(--chrome);color:var(--black)}
+.cc-info{position:relative;z-index:2;padding:clamp(14px,2.5vw,22px);width:100%}
+.cc-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,2.5vw,2rem);letter-spacing:.08em;color:var(--chrome);line-height:1;transition:color var(--fast)}
+.cc-sub{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--silver-dim);margin-top:4px}
+.cc-arr{position:absolute;top:14px;right:14px;width:30px;height:30px;border:1px solid rgba(200,200,200,.18);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--silver-dim);transition:background var(--fast),border-color var(--fast),color var(--fast),transform .35s var(--ease)}
+.cc:hover .cc-arr{background:var(--chrome);border-color:var(--chrome);color:var(--black);transform:rotate(45deg)}
+
+/* BRAND STRIP */
+.bstrip{background:var(--black2);border-top:1px solid var(--gb);border-bottom:1px solid var(--gb);padding:clamp(28px,4vw,48px) var(--px);text-align:center}
+.bstrip-lbl{font-size:var(--fs-lbl);letter-spacing:.3em;text-transform:uppercase;color:var(--silver-dim);margin-bottom:24px}
+.brand-row{display:flex;align-items:center;justify-content:center;gap:clamp(28px,5vw,64px);flex-wrap:wrap}
+.brand-item{font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,2.2vw,1.5rem);letter-spacing:.18em;color:var(--silver-dim);transition:color .35s;display:flex;align-items:center;gap:8px}
+.brand-item:hover{color:var(--silver)}
+.bdot{width:5px;height:5px;border-radius:50%;background:var(--gb)}
+
+/* ARRIVALS */
+.arrivals{padding:var(--ps) var(--px);background:var(--black2);border-top:1px solid var(--gb)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(210px,100%),1fr));gap:var(--gap)}
+.pc{display:flex;flex-direction:column;cursor:pointer;transition:transform var(--med)}
+.pc:hover{transform:translateY(-6px)}
+.pthumb{position:relative;aspect-ratio:3/4;background:var(--black3);overflow:hidden}
+.ptbg{position:absolute;inset:0}
+.pb1{background:linear-gradient(155deg,#1a1814,#0e0c0a)}
+.pb2{background:linear-gradient(155deg,#12121c,#0c0c18)}
+.pb3{background:linear-gradient(155deg,#1c1414,#120e0e)}
+.pb4{background:linear-gradient(155deg,#141a14,#0e140e)}
+.pb5{background:linear-gradient(155deg,#1a1614,#120f0c)}
+.pb6{background:linear-gradient(155deg,#1a1414,#140c0c)}
+.part{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.part-i{width:55%;height:68%;border:1px solid rgba(255,255,255,.055);position:relative}
+.part-i::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:32%;height:18%;border:1px solid rgba(255,255,255,.055);border-top:none}
+.plbl{position:absolute;top:10px;left:10px;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;padding:4px 9px;font-weight:600;z-index:2}
+.pl-new{background:var(--chrome);color:var(--black)}
+.pl-hot{background:var(--red);color:#fff}
+.pl-rr{background:transparent;border:1px solid var(--silver-mid);color:var(--silver)}
+.pquick{position:absolute;bottom:0;left:0;right:0;background:rgba(8,8,8,.94);backdrop-filter:blur(10px);border-top:1px solid var(--gb);padding:13px 16px;text-align:center;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--chrome);font-weight:500;transform:translateY(100%);transition:transform .35s var(--ease)}
+.pc:hover .pquick{transform:translateY(0)}
+.pinfo{padding:14px 4px 4px}
+.pbrnd{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:500;margin-bottom:3px}
+.pname{font-size:clamp(.82rem,1.5vw,.9rem);font-weight:400;color:var(--silver);margin-bottom:8px;line-height:1.3}
+.pprice{display:flex;align-items:center;gap:8px}
+.pnow{font-size:clamp(.88rem,1.5vw,.98rem);font-weight:600;color:var(--chrome)}
+.pwas{font-size:.76rem;color:var(--silver-dim);text-decoration:line-through}
+.psave{font-size:.6rem;color:var(--red);font-weight:600;letter-spacing:.05em}
+
+/* FOMO */
+.fomo{padding:var(--ps) var(--px);background:var(--black);border-top:1px solid var(--gb);position:relative;overflow:hidden}
+.fomo-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 50%,rgba(212,43,43,.06) 0%,transparent 70%)}
+.fomo-in{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center}
+.fomo-eye{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,14vw,12rem);line-height:.85;letter-spacing:.03em}
+.f1{display:block;background:linear-gradient(150deg,#e8e8e8 0%,#888 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.f2{display:block;-webkit-text-stroke:1.5px rgba(212,43,43,.6);-webkit-text-fill-color:transparent}
+.fomo-tag{display:inline-flex;align-items:center;gap:8px;background:var(--red-dim);border:1px solid rgba(212,43,43,.3);padding:6px 16px;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:20px}
+.ftdot{width:5px;height:5px;border-radius:50%;background:var(--red);animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.fomo-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,3.5vw,3rem);letter-spacing:.06em;line-height:1.05;background:linear-gradient(135deg,#e0e0e0,#999);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+.fomo-desc{font-size:var(--fs-body);color:var(--silver-mid);line-height:1.75;margin-bottom:28px;max-width:400px}
+.fdrops{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.drow{display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--glass);border:1px solid var(--gb);transition:background var(--fast),border-color var(--fast)}
+.drow:hover{background:var(--glass-h);border-color:rgba(255,255,255,.14)}
+.dicon{font-size:1.3rem;opacity:.7;flex-shrink:0}
+.dname{font-size:.82rem;font-weight:500;color:var(--silver);flex:1}
+.dtag{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;padding:3px 9px;font-weight:600}
+.dt-f{background:var(--red-dim);color:var(--red);border:1px solid rgba(212,43,43,.3)}
+.dt-n{background:rgba(255,255,255,.06);color:var(--silver);border:1px solid var(--gb)}
+
+/* ABOUT */
+.about{padding:var(--ps) var(--px);background:var(--black2);border-top:1px solid var(--gb);display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center}
+.avis{position:relative;height:clamp(300px,44vw,560px)}
+.abox{position:absolute;inset:0;background:var(--black3);border:1px solid var(--gb);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.abox::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,#181410,#0a0a0a)}
+.aghost{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,14vw,11rem);letter-spacing:.14em;color:rgba(200,200,200,.04);position:relative;z-index:1;user-select:none}
+.agmars{position:absolute;bottom:24px;right:28px;font-size:clamp(2.5rem,5vw,4rem);color:rgba(200,200,200,.06);z-index:1}
+.aline{position:absolute;top:0;left:32px;width:1px;height:48px;background:var(--red);z-index:2}
+.afloat{position:absolute;bottom:-16px;right:-16px;width:clamp(130px,16vw,175px);height:clamp(130px,16vw,175px);background:var(--black);border:1px solid var(--gb);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;z-index:3}
+.afnum{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);background:linear-gradient(135deg,#e0e0e0,#888);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.aflbl{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--silver-dim);text-align:center;line-height:1.4}
+.abody{font-size:var(--fs-body);color:var(--silver-mid);line-height:1.8;margin:20px 0 32px}
+.abody strong{color:var(--silver);font-weight:500}
+.afeats{display:flex;flex-direction:column}
+.afrow{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--gb);transition:background var(--fast)}
+.afrow:last-child{border-bottom:none}
+.aficon{width:38px;height:38px;flex-shrink:0;border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;font-size:.95rem;color:var(--silver-mid);transition:border-color var(--fast),color var(--fast)}
+.afrow:hover .aficon{border-color:rgba(255,255,255,.2);color:var(--silver)}
+.aftitle{font-size:.84rem;font-weight:500;color:var(--silver);margin-bottom:3px}
+.afdesc{font-size:.76rem;color:var(--silver-dim);line-height:1.5}
+
+/* BRANCHES */
+.branches{padding:var(--ps) var(--px);background:var(--black);border-top:1px solid var(--gb)}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:var(--gap);margin-top:clamp(28px,4vw,48px)}
+.bcard{background:var(--glass);border:1px solid var(--gb);padding:clamp(24px,3.5vw,40px);position:relative;overflow:hidden;transition:background var(--fast),border-color var(--med),transform var(--med)}
+.bcard:hover{background:var(--glass-h);border-color:rgba(255,255,255,.15);transform:translateY(-4px)}
+.bcard::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--red);transition:height var(--med)}
+.bcard:hover::before{height:100%}
+.bnum{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:rgba(255,255,255,.04);line-height:1;position:absolute;top:12px;right:20px;user-select:none}
+.bname{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:.08em;background:linear-gradient(135deg,#d8d8d8,#888);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:8px 0 16px}
+.bdet{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.bico{font-size:.85rem;color:var(--silver-dim);flex-shrink:0;margin-top:1px}
+.binfo{font-size:.8rem;color:var(--silver-dim);line-height:1.5}
+.binfo strong{color:var(--silver);font-weight:500}
+.bdir{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--silver-mid);border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:2px;transition:color var(--fast),border-color var(--fast),gap var(--fast)}
+.bcard:hover .bdir{color:var(--chrome);border-color:rgba(255,255,255,.3);gap:14px}
+
+/* TESTIMONIALS */
+.testis{padding:var(--ps) var(--px);background:var(--black2);border-top:1px solid var(--gb)}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:var(--gap);margin-top:clamp(28px,4vw,48px)}
+.tcard{background:var(--glass);border:1px solid var(--gb);padding:clamp(20px,3vw,32px);position:relative;transition:background var(--fast),border-color var(--fast),transform var(--med)}
+.tcard:hover{background:var(--glass-h);border-color:rgba(255,255,255,.14);transform:translateY(-4px)}
+.tq{position:absolute;top:12px;right:18px;font-size:4rem;color:rgba(255,255,255,.04);font-family:Georgia,serif;line-height:1;user-select:none}
+.tstr{color:#f0c040;font-size:.76rem;letter-spacing:2px;margin-bottom:14px}
+.ttxt{font-size:.86rem;color:var(--silver-mid);line-height:1.75;font-style:italic;margin-bottom:20px}
+.tauth{display:flex;align-items:center;gap:12px;border-top:1px solid var(--gb);padding-top:16px}
+.tav{width:36px;height:36px;border-radius:50%;background:var(--black3);border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--silver);font-weight:600;flex-shrink:0}
+.tname{font-size:.8rem;font-weight:500;color:var(--silver)}
+.tsrc{font-size:.62rem;color:var(--silver-dim);letter-spacing:.08em}
+.rsum{display:flex;align-items:center;gap:28px;margin-top:clamp(32px,5vw,56px);padding-top:clamp(24px,4vw,40px);border-top:1px solid var(--gb);flex-wrap:wrap}
+.rbig{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,8vw,6rem);line-height:1;background:linear-gradient(135deg,#e0e0e0,#888);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.rmeta .rstar{color:#f0c040;font-size:1.1rem;letter-spacing:3px}
+.rmeta p{font-size:.72rem;color:var(--silver-dim);letter-spacing:.1em;margin-top:4px}
+
+/* CTA */
+.cta-ban{position:relative;padding:clamp(48px,8vw,96px) var(--px);background:var(--black);border-top:1px solid var(--gb);text-align:center;overflow:hidden}
+.cta-ban::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 50%,rgba(212,43,43,.07) 0%,transparent 70%)}
+.ctabig{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,9vw,8rem);letter-spacing:.04em;line-height:.9;position:relative;z-index:1;margin-bottom:clamp(16px,3vw,28px)}
+.ctabig span{background:linear-gradient(140deg,#f0f0f0 0%,#999 50%,#e0e0e0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.ctabig em{display:block;-webkit-text-stroke:1.5px rgba(212,43,43,.5);-webkit-text-fill-color:transparent;font-style:normal}
+.ctasub{font-size:var(--fs-body);color:var(--silver-mid);margin-bottom:clamp(24px,4vw,40px);position:relative;z-index:1}
+.cta-acts{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;position:relative;z-index:1}
+
+/* FOOTER */
+footer{background:var(--black2);border-top:1px solid var(--gb);padding:clamp(40px,6vw,80px) var(--px) clamp(20px,3vw,32px)}
+.ftop{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:clamp(28px,4vw,56px);padding-bottom:clamp(32px,5vw,52px);border-bottom:1px solid var(--gb)}
+.flogo-row{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.flogo-mars{font-size:1.4rem;color:var(--silver-dim)}
+.flogo-txt{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.12em;background:linear-gradient(135deg,#d8d8d8,#888);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ftagline{font-size:.82rem;color:var(--silver-dim);line-height:1.65;max-width:260px;margin-bottom:20px}
+.fsoc{display:flex;gap:8px}
+.fsb{width:34px;height:34px;border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;font-size:.82rem;color:var(--silver-dim);background:none;transition:border-color var(--fast),color var(--fast),background var(--fast)}
+.fsb:hover{border-color:rgba(255,255,255,.2);color:var(--chrome);background:var(--glass)}
+.fcol h5{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--silver);font-weight:600;margin-bottom:18px}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.fcol ul a{font-size:.82rem;color:var(--silver-dim);transition:color var(--fast)}
+.fcol ul a:hover{color:var(--silver)}
+.fnl p{font-size:.8rem;color:var(--silver-dim);line-height:1.6;margin-bottom:14px}
+.nlf{display:flex}
+.nli{flex:1;background:var(--black3);border:1px solid var(--gb);border-right:none;padding:10px 14px;color:var(--chrome);font-family:'Outfit',sans-serif;font-size:.8rem;outline:none;transition:border-color var(--fast);min-width:0}
+.nli::placeholder{color:var(--silver-dim)}
+.nli:focus{border-color:var(--glass-h)}
+.nlb{background:var(--chrome);color:var(--black);border:none;padding:10px 16px;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;white-space:nowrap;transition:background var(--fast)}
+.nlb:hover{background:#fff}
+.fbot{display:flex;align-items:center;justify-content:space-between;padding-top:clamp(16px,3vw,28px);gap:16px;flex-wrap:wrap}
+.fcopy{font-size:.7rem;color:var(--silver-dim);letter-spacing:.06em}
+.flinks{display:flex;gap:20px}
+.flinks a{font-size:.7rem;color:var(--silver-dim);transition:color var(--fast)}
+.flinks a:hover{color:var(--silver)}
+
+/* INSTA FLOAT */
+.ifloat{position:fixed;bottom:clamp(16px,3vw,28px);right:clamp(16px,3vw,28px);z-index:50;display:flex;align-items:center;gap:10px;background:rgba(8,8,8,.94);border:1px solid var(--gb);backdrop-filter:blur(16px);padding:11px 18px;transition:border-color var(--fast),transform var(--fast);animation:fin 1s 1.2s var(--ease) both}
+.ifloat:hover{border-color:rgba(255,255,255,.2);transform:translateY(-3px)}
+@keyframes fin{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.iico{width:22px;height:22px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#fff;flex-shrink:0}
+.ihandle{font-size:.72rem;font-weight:600;color:var(--silver)}
+.icount{font-size:.6rem;color:var(--silver-dim);letter-spacing:.08em}
+
+/* ── REAL IMAGES ── */
+/* Hero image */
+.hero-img{position:absolute;inset:0;z-index:0}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.28;filter:grayscale(30%) contrast(1.1)}
+.hero-mesh{z-index:1}
+.hero-grid{z-index:2}
+.hero-scan{z-index:3}
+.hero-c{z-index:4}
+.hero-scroll{z-index:4}
+
+/* Category card images */
+.cc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.45;filter:grayscale(20%) contrast(1.05);transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.cc:hover .cc-img{opacity:.6;transform:scale(1.06)}
+.cc-stripe{z-index:1}
+.cc-art{z-index:2}
+.cc-ov{z-index:3}
+.cc-bdg{z-index:5}
+.cc-info{z-index:4}
+.cc-arr{z-index:5}
+
+/* Product card images */
+.pimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .55s var(--ease),opacity .3s}
+.pc:hover .pimg{transform:scale(1.04)}
+.ptbg{z-index:0}
+.pimg{z-index:1}
+.part{z-index:2;opacity:0}
+.plbl{z-index:4}
+.pquick{z-index:4}
+
+/* About image */
+.abox-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.18;filter:grayscale(40%) contrast(1.1);z-index:0}
+.abox::before{z-index:1}
+.aghost{z-index:2}
+.agmars{z-index:2}
+
+/* FOMO visual image */
+.fomo-visual-img{width:100%;height:clamp(260px,40vw,500px);object-fit:cover;object-position:center top;opacity:.55;filter:grayscale(25%) contrast(1.1);position:relative;z-index:1}
+.fomo-visual-wrap{position:relative;overflow:hidden}
+.fomo-visual-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(8,8,8,.5) 0%,transparent 40%,transparent 60%,rgba(8,8,8,.5) 100%)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero-c{grid-template-columns:1fr}
+  .hero-r{flex-direction:row;flex-wrap:wrap;margin-top:24px}
+  .stat{min-width:140px;flex:1}
+  .cat-grid{grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(3,clamp(140px,20vw,240px))}
+  .cc:nth-child(1){grid-column:1/4;grid-row:1/3}
+  .cc:nth-child(2){grid-column:4/7;grid-row:1/2}
+  .cc:nth-child(3){grid-column:4/7;grid-row:2/3}
+  .cc:nth-child(4){grid-column:1/4;grid-row:3/4}
+  .cc:nth-child(5){grid-column:4/7;grid-row:3/4}
+  .fomo-in{grid-template-columns:1fr;gap:32px}
+  .about{grid-template-columns:1fr}
+  .avis{height:clamp(280px,50vw,400px)}
+  .ftop{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links,.nav-call{display:none}
+  .ham{display:flex}
+  .hero-r{display:none}
+  .cat-grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,clamp(130px,28vw,200px))}
+  .cc:nth-child(1){grid-column:1/3;grid-row:1/2}
+  .cc:nth-child(2){grid-column:1/2;grid-row:2/3}
+  .cc:nth-child(3){grid-column:2/3;grid-row:2/3}
+  .cc:nth-child(4){grid-column:1/2;grid-row:3/4}
+  .cc:nth-child(5){grid-column:2/3;grid-row:3/4}
+  .pgrid{grid-template-columns:repeat(2,1fr)}
+  .ftop{grid-template-columns:1fr}
+  .fbot{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){
+  .hero-acts,.cta-acts{flex-direction:column;align-items:flex-start}
+  .hero-acts .btn-p,.hero-acts .btn-g,.cta-acts .btn-p,.cta-acts .btn-g{width:100%;justify-content:center}
+  .rsum{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- INSTAGRAM FLOAT -->
+<a href="https://www.instagram.com/leofashion.official/" target="_blank" class="ifloat" aria-label="Follow on Instagram">
+  <div class="iico">◈</div>
+  <div>
+    <div class="ihandle">@leofashion.official</div>
+    <div class="icount">6,315 followers · 1,001 posts</div>
+  </div>
+</a>
+
+<!-- ANNOUNCE -->
+<div class="abar" id="abar">
+  Flat 20% Off Storewide
+  <span>✦</span>
+  New Rare Rabbit Drop — In Store Now
+  <span>✦</span>
+  Open 7 Days · 10:30 AM – 10:30 PM
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="logo">
+    <span class="logo-mars">♂</span>
+    <span>
+      <span class="logo-text">LEO</span>
+      <span class="logo-sub">Fashions · Bengaluru</span>
+    </span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#cats">Collections</a></li>
+    <li><a href="#arrivals">New Arrivals</a></li>
+    <li><a href="#fomo">Drops</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#branches">Stores</a></li>
+  </ul>
+  <div class="nav-r">
+    <a href="tel:+919741835959" class="nav-call">☎ &nbsp;Call Us</a>
+    <button class="ham" id="hamBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mmenu" id="mmenu">
+  <a href="#cats">Collections</a>
+  <a href="#arrivals">New Arrivals</a>
+  <a href="#fomo">Drops</a>
+  <a href="#about">About</a>
+  <a href="#branches">Stores</a>
+  <a href="tel:+919741835959">☎ Call Us</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero" class="hero">
+  <div class="hero-img"><img crossorigin="anonymous" src="https://images.pexels.com/photos/2422290/pexels-photo-2422290.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Men's premium fashion" loading="eager"/></div>
+  <div class="hero-mesh"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-c">
+    <div class="hero-l">
+      <div class="hero-ey">
+        <span class="hey-line"></span>
+        <span class="hey-text">Premium Menswear · Est. Kammanahalli, Bengaluru</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="s">WEAR</span>
+        <span class="o">BOLD.</span>
+        <span class="s">BE LEO.</span>
+      </h1>
+      <p class="hero-desc">Rare Rabbit drops. Premium hoodies. Puff jackets. Street-ready fits. Bengaluru's sharpest menswear store — now with a digital home.</p>
+      <div class="hero-acts">
+        <a href="#cats"     class="btn-p">Shop Collections →</a>
+        <a href="#fomo"     class="btn-g">Latest Drops</a>
+      </div>
+    </div>
+    <div class="hero-r">
+      <div class="stat"><div class="stat-n">4.0★</div><div class="stat-l">Google Rating · 89 Reviews</div></div>
+      <div class="stat"><div class="stat-n">6.3K</div><div class="stat-l">Instagram Followers</div></div>
+      <div class="stat"><div class="stat-n">20%</div><div class="stat-l">Storewide Discount Now</div></div>
+      <div class="stat"><div class="stat-n">2</div><div class="stat-l">Stores · Bengaluru</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="sdot"></div>
+    <span class="stext">Scroll</span>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="mq-wrap" aria-hidden="true">
+  <div class="mq-row">
+    <div class="mq-track">
+      <span class="mq-item hi"><span class="mq-dot"></span>Rare Rabbit</span>
+      <span class="mq-item"><span class="mq-dot"></span>Premium Hoodies</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>Puff Jackets</span>
+      <span class="mq-item"><span class="mq-dot"></span>Graphic Tees</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>Formal Shirts</span>
+      <span class="mq-item"><span class="mq-dot"></span>FOMO Drops</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>Footwear</span>
+      <span class="mq-item"><span class="mq-dot"></span>Denims & Trousers</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>Rare Rabbit</span>
+      <span class="mq-item"><span class="mq-dot"></span>Premium Hoodies</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>Puff Jackets</span>
+      <span class="mq-item"><span class="mq-dot"></span>Graphic Tees</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>Formal Shirts</span>
+      <span class="mq-item"><span class="mq-dot"></span>FOMO Drops</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>Footwear</span>
+      <span class="mq-item"><span class="mq-dot"></span>Denims & Trousers</span>
+    </div>
+  </div>
+  <div class="mq-row">
+    <div class="mq-track">
+      <span class="mq-item"><span class="mq-dot"></span>Kammanahalli</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>Open 7 Days</span>
+      <span class="mq-item"><span class="mq-dot"></span>10:30 AM – 10:30 PM</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>Yeshwanthpur</span>
+      <span class="mq-item"><span class="mq-dot"></span>Flat 20% Off</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>@leofashion.official</span>
+      <span class="mq-item"><span class="mq-dot"></span>+91 97418 35959</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>2 Stores in Bengaluru</span>
+      <span class="mq-item"><span class="mq-dot"></span>Kammanahalli</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>Open 7 Days</span>
+      <span class="mq-item"><span class="mq-dot"></span>10:30 AM – 10:30 PM</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>Yeshwanthpur</span>
+      <span class="mq-item"><span class="mq-dot"></span>Flat 20% Off</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>@leofashion.official</span>
+      <span class="mq-item"><span class="mq-dot"></span>+91 97418 35959</span>
+      <span class="mq-item hi"><span class="mq-dot"></span>2 Stores in Bengaluru</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CATEGORIES ═══ -->
+<section id="cats" class="cats">
+  <div class="sec-hd reveal">
+    <div><p class="lbl">Browse the Collection</p><h2 class="sh" style="margin-top:10px">SHOP BY<br/>CATEGORY</h2></div>
+    <a href="#" class="val">All Categories →</a>
+  </div>
+  <div class="cat-grid">
+    <div class="cc reveal" style="transition-delay:.04s" tabindex="0">
+      <img crossorigin="anonymous" class="cc-img" src="https://images.pexels.com/photos/1020370/pexels-photo-1020370.jpeg?auto=compress&cs=tinysrgb&w=800" alt="T-Shirts collection" loading="lazy"/>
+      <div class="cc-stripe"></div><div class="cc-art">👕</div><div class="cc-ov"></div>
+      <span class="cc-bdg bdg-bs">Best Seller</span>
+      <div class="cc-info"><div class="cc-name">T-SHIRTS &<br/>GRAPHIC TEES</div><div class="cc-sub">Drop-ready · Everyday wear</div></div>
+      <span class="cc-arr">↗</span>
+    </div>
+    <div class="cc reveal" style="transition-delay:.08s" tabindex="0">
+      <img crossorigin="anonymous" class="cc-img" src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Premium Hoodies" loading="lazy"/>
+      <div class="cc-stripe"></div><div class="cc-art">🧥</div><div class="cc-ov"></div>
+      <span class="cc-bdg bdg-rr">Rare Rabbit</span>
+      <div class="cc-info"><div class="cc-name">PREMIUM<br/>HOODIES</div><div class="cc-sub">Rare Rabbit & Exclusives</div></div>
+      <span class="cc-arr">↗</span>
+    </div>
+    <div class="cc reveal" style="transition-delay:.12s" tabindex="0">
+      <img crossorigin="anonymous" class="cc-img" src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Footwear" loading="lazy"/>
+      <div class="cc-stripe"></div><div class="cc-art">👟</div><div class="cc-ov"></div>
+      <div class="cc-info"><div class="cc-name">FOOTWEAR</div><div class="cc-sub">Sneakers · Street Style</div></div>
+      <span class="cc-arr">↗</span>
+    </div>
+    <div class="cc reveal" style="transition-delay:.16s" tabindex="0">
+      <img crossorigin="anonymous" class="cc-img" src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Shirts and Formals" loading="lazy"/>
+      <div class="cc-stripe"></div><div class="cc-art">👔</div><div class="cc-ov"></div>
+      <div class="cc-info"><div class="cc-name">SHIRTS &<br/>FORMALS</div><div class="cc-sub">Office-ready · Occasion</div></div>
+      <span class="cc-arr">↗</span>
+    </div>
+    <div class="cc reveal" style="transition-delay:.20s" tabindex="0">
+      <img crossorigin="anonymous" class="cc-img" src="https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Puff Jackets and Outerwear" loading="lazy"/>
+      <div class="cc-stripe"></div><div class="cc-art">🧤</div><div class="cc-ov"></div>
+      <span class="cc-bdg bdg-hot">New Drop</span>
+      <div class="cc-info"><div class="cc-name">PUFF JACKETS<br/>& OUTERWEAR</div><div class="cc-sub">Winter · Layered looks</div></div>
+      <span class="cc-arr">↗</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BRAND STRIP ═══ -->
+<div class="bstrip reveal">
+  <p class="bstrip-lbl">Brands & Styles Available In-Store</p>
+  <div class="brand-row">
+    <span class="brand-item">RARE RABBIT</span><span class="bdot"></span>
+    <span class="brand-item">PREMIUM HOODIES</span><span class="bdot"></span>
+    <span class="brand-item">PUFF JACKETS</span><span class="bdot"></span>
+    <span class="brand-item">EXCLUSIVE TEES</span><span class="bdot"></span>
+    <span class="brand-item">FOOTWEAR</span><span class="bdot"></span>
+    <span class="brand-item">GUCCI STYLE</span>
+  </div>
+</div>
+
+<!-- ═══ NEW ARRIVALS ═══ -->
+<section id="arrivals" class="arrivals">
+  <div class="sec-hd reveal">
+    <div><p class="lbl">Just Dropped</p><h2 class="sh" style="margin-top:10px">NEW<br/>ARRIVALS</h2></div>
+    <a href="https://www.instagram.com/leofashion.official/" target="_blank" class="val">View on Instagram →</a>
+  </div>
+  <div class="pgrid">
+    <div class="pc reveal" style="transition-delay:.05s">
+      <div class="pthumb"><div class="ptbg pb1"></div>
+        <img crossorigin="anonymous" class="pimg" src="https://images.pexels.com/photos/3622608/pexels-photo-3622608.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Signature Print Shirt" loading="lazy"/>
+        <span class="plbl pl-rr">Rare Rabbit</span><div class="pquick">+ View Details</div></div>
+      <div class="pinfo"><div class="pbrnd">Rare Rabbit</div><div class="pname">Signature Print Shirt</div>
+        <div class="pprice"><span class="pnow">₹2,499</span><span class="pwas">₹2,999</span><span class="psave">-17%</span></div></div>
+    </div>
+    <div class="pc reveal" style="transition-delay:.09s">
+      <div class="pthumb"><div class="ptbg pb2"></div>
+        <img crossorigin="anonymous" class="pimg" src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Oversized Premium Hoodie" loading="lazy"/>
+        <span class="plbl pl-hot">🔥 FOMO Drop</span><div class="pquick">+ View Details</div></div>
+      <div class="pinfo"><div class="pbrnd">Leo Exclusives</div><div class="pname">Oversized Premium Hoodie</div>
+        <div class="pprice"><span class="pnow">₹1,599</span><span class="pwas">₹1,999</span><span class="psave">-20%</span></div></div>
+    </div>
+    <div class="pc reveal" style="transition-delay:.13s">
+      <div class="pthumb"><div class="ptbg pb3"></div>
+        <img crossorigin="anonymous" class="pimg" src="https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Puff Jacket All-Black" loading="lazy"/>
+        <span class="plbl pl-new">New</span><div class="pquick">+ View Details</div></div>
+      <div class="pinfo"><div class="pbrnd">Leo Collection</div><div class="pname">Puff Jacket — All-Black</div>
+        <div class="pprice"><span class="pnow">₹2,199</span><span class="pwas">₹2,799</span><span class="psave">-21%</span></div></div>
+    </div>
+    <div class="pc reveal" style="transition-delay:.17s">
+      <div class="pthumb"><div class="ptbg pb4"></div>
+        <img crossorigin="anonymous" class="pimg" src="https://images.pexels.com/photos/1020370/pexels-photo-1020370.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Graphic Drop Tee" loading="lazy"/>
+        <span class="plbl pl-new">New</span><div class="pquick">+ View Details</div></div>
+      <div class="pinfo"><div class="pbrnd">Leo Collection</div><div class="pname">Graphic Drop Tee Vol.3</div>
+        <div class="pprice"><span class="pnow">₹699</span><span class="pwas">₹899</span><span class="psave">-22%</span></div></div>
+    </div>
+    <div class="pc reveal" style="transition-delay:.21s">
+      <div class="pthumb"><div class="ptbg pb5"></div>
+        <img crossorigin="anonymous" class="pimg" src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Leo Street Sneakers" loading="lazy"/>
+        <span class="plbl pl-hot">Trending</span><div class="pquick">+ View Details</div></div>
+      <div class="pinfo"><div class="pbrnd">Footwear</div><div class="pname">Leo Street Sneakers</div>
+        <div class="pprice"><span class="pnow">₹1,899</span><span class="pwas">₹2,399</span><span class="psave">-21%</span></div></div>
+    </div>
+    <div class="pc reveal" style="transition-delay:.25s">
+      <div class="pthumb"><div class="ptbg pb6"></div>
+        <img crossorigin="anonymous" class="pimg" src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Oxford Formal Shirt" loading="lazy"/>
+        <span class="plbl pl-rr">Premium</span><div class="pquick">+ View Details</div></div>
+      <div class="pinfo"><div class="pbrnd">Leo Collection</div><div class="pname">Oxford Formal Shirt</div>
+        <div class="pprice"><span class="pnow">₹899</span><span class="pwas">₹1,199</span><span class="psave">-25%</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOMO DROPS ═══ -->
+<section id="fomo" class="fomo">
+  <div class="fomo-bg"></div>
+  <div class="fomo-in">
+    <div class="reveal">
+      <div class="fomo-visual-wrap">
+        <img crossorigin="anonymous" class="fomo-visual-img" src="https://images.pexels.com/photos/2422290/pexels-photo-2422290.jpeg?auto=compress&cs=tinysrgb&w=900" alt="FOMO Drop fashion" loading="lazy"/>
+        <div style="position:absolute;bottom:24px;left:24px;z-index:2">
+          <div class="fomo-eye"><span class="f1">FOMO</span><span class="f2">DROP</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <div class="fomo-tag"><span class="ftdot"></span>Limited Availability — In Store Only</div>
+      <h3 class="fomo-title">EXCLUSIVE DROPS<br/>YOU CAN'T MISS</h3>
+      <p class="fomo-desc">Leo Fashions drops limited pieces every week — premium brands, exclusive colourways, and styles that move fast. Follow <strong style="color:var(--silver)">@leofashion.official</strong> to never miss a drop.</p>
+      <div class="fdrops">
+        <div class="drow"><span class="dicon">🧥</span><span class="dname">Rare Rabbit Print Collection — SS'25</span><span class="dtag dt-f">🔥 Hot</span></div>
+        <div class="drow"><span class="dicon">👟</span><span class="dname">Exclusive Sneaker Drop — New Colourways</span><span class="dtag dt-n">New</span></div>
+        <div class="drow"><span class="dicon">🧤</span><span class="dname">Premium Puff Jacket — Winter Edition</span><span class="dtag dt-f">Limited</span></div>
+        <div class="drow"><span class="dicon">👕</span><span class="dname">Oversized Hoodie Vol.4 — Graphic Series</span><span class="dtag dt-n">New</span></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="https://www.instagram.com/leofashion.official/" target="_blank" class="btn-p">Follow for Drops →</a>
+        <a href="#branches" class="btn-g">Find a Store</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about" class="about">
+  <div class="avis reveal">
+    <div class="abox">
+      <img crossorigin="anonymous" class="abox-img" src="https://images.pexels.com/photos/3965557/pexels-photo-3965557.jpeg?auto=compress&cs=tinysrgb&w=900" alt="LEO Fashions store" loading="lazy"/>
+      <div class="aghost">LEO</div><div class="agmars">♂</div>
+    </div>
+    <div class="aline"></div>
+    <div class="afloat"><div class="afnum">6K+</div><div class="aflbl">Instagram<br/>Followers</div></div>
+  </div>
+  <div class="reveal" style="transition-delay:.14s">
+    <p class="lbl">Our Story</p>
+    <h2 class="sh" style="margin-top:10px">THE MAN<br/>BEHIND<br/>THE LOOK</h2>
+    <p class="abody">At <strong>LEO Fashions</strong>, we don't just sell clothes — we build looks. From <strong>Rare Rabbit drops</strong> to premium hoodies, puff jackets, and street-ready footwear, every piece is handpicked for the man who refuses to blend in.<br/><br/>With two stores in <strong>Kammanahalli</strong> and <strong>Yeshwanthpur</strong>, and a growing community of <strong>6,000+ followers on Instagram</strong>, Leo Fashions is Bengaluru's fastest-growing premium menswear destination.</p>
+    <div class="afeats">
+      <div class="afrow"><div class="aficon">♻</div><div><div class="aftitle">Fresh Drops, Every Week</div><div class="afdesc">New styles land constantly — we refresh our collection so there's always something new.</div></div></div>
+      <div class="afrow"><div class="aficon">◈</div><div><div class="aftitle">Premium Brands In-Store</div><div class="afdesc">Rare Rabbit and other premium labels available at competitive prices.</div></div></div>
+      <div class="afrow"><div class="aficon">✦</div><div><div class="aftitle">Honest Prices · Flat 20% Off</div><div class="afdesc">Premium style shouldn't cost a fortune. Storewide discount running now.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BRANCHES ═══ -->
+<section id="branches" class="branches">
+  <div class="sec-hd reveal">
+    <div><p class="lbl">Find Us Near You</p><h2 class="sh" style="margin-top:10px">OUR<br/>STORES</h2></div>
+  </div>
+  <div class="bgrid">
+    <div class="bcard reveal" style="transition-delay:.05s">
+      <div class="bnum">01</div>
+      <p class="lbl" style="color:var(--red)">Flagship Store</p>
+      <h3 class="bname">KAMMANAHALLI</h3>
+      <div class="bdet"><span class="bico">📍</span><div class="binfo">No. 43/1, 2nd Main, Dr. Rajkumar Park Road,<br/>Chinnappa Layout, Kammanahalli,<br/><strong>Bengaluru — 560084</strong></div></div>
+      <div class="bdet"><span class="bico">⏰</span><div class="binfo">Mon – Sun · <strong>10:30 AM – 10:30 PM</strong></div></div>
+      <div class="bdet"><span class="bico">☎</span><div class="binfo"><a href="tel:+919741835959" style="color:var(--silver)">+91 97418 35959</a></div></div>
+      <a href="https://maps.google.com/?cid=4648289653954477749" target="_blank" class="bdir">Get Directions →</a>
+    </div>
+    <div class="bcard reveal" style="transition-delay:.10s">
+      <div class="bnum">02</div>
+      <p class="lbl">Second Location</p>
+      <h3 class="bname">YESHWANTHPUR</h3>
+      <div class="bdet"><span class="bico">📍</span><div class="binfo">Yeshwanthpur,<br/><strong>Bengaluru, Karnataka</strong></div></div>
+      <div class="bdet"><span class="bico">⏰</span><div class="binfo">Mon – Sun · <strong>10:30 AM – 10:30 PM</strong></div></div>
+      <div class="bdet"><span class="bico">📱</span><div class="binfo"><a href="https://www.instagram.com/leofashion.official/" target="_blank" style="color:var(--silver)">@leofashion.official</a></div></div>
+      <a href="https://www.instagram.com/leofashion.official/" target="_blank" class="bdir">Follow for Updates →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="reviews" class="testis">
+  <div class="sec-hd reveal">
+    <div><p class="lbl">Customer Reviews</p><h2 class="sh" style="margin-top:10px">WHAT PEOPLE<br/>ARE SAYING</h2></div>
+    <a href="https://maps.google.com/?cid=4648289653954477749" target="_blank" class="val">All Reviews →</a>
+  </div>
+  <div class="tgrid">
+    <div class="tcard reveal" style="transition-delay:.05s">
+      <div class="tq">"</div><div class="tstr">★★★★★</div>
+      <p class="ttxt">"Absolutely love the collection here. The staff was incredibly friendly and went out of their way to help me find the right size. Fair price and genuine customer service."</p>
+      <div class="tauth"><div class="tav">RK</div><div><div class="tname">Rahul K.</div><div class="tsrc">Verified · Google Maps</div></div></div>
+    </div>
+    <div class="tcard reveal" style="transition-delay:.10s">
+      <div class="tq">"</div><div class="tstr">★★★★★</div>
+      <p class="ttxt">"Wide range of products. Good to see boys T-shirt collection and full shirts. Collection refreshed frequently. Well maintained with great price points."</p>
+      <div class="tauth"><div class="tav">AS</div><div><div class="tname">Akhil S.</div><div class="tsrc">Verified · Google Maps</div></div></div>
+    </div>
+    <div class="tcard reveal" style="transition-delay:.15s">
+      <div class="tq">"</div><div class="tstr">★★★★★</div>
+      <p class="ttxt">"Shoutout to the very hospitable staff — especially Sinan! Great shopping experience, wide range of styles, and the quality of clothes is top-notch."</p>
+      <div class="tauth"><div class="tav">MF</div><div><div class="tname">Mohammed F.</div><div class="tsrc">Verified · Google Maps</div></div></div>
+    </div>
+  </div>
+  <div class="rsum reveal">
+    <div class="rbig">4.0</div>
+    <div class="rmeta"><div class="rstar">★★★★☆</div><p>Based on 89 Google Reviews · Kammanahalli</p></div>
+    <div style="margin-left:auto"><a href="https://maps.google.com/?cid=4648289653954477749" target="_blank" class="btn-g" style="font-size:.68rem">Read All Reviews →</a></div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-ban">
+  <div class="ctabig reveal"><span>VISIT</span><em>LEO.</em></div>
+  <p class="ctasub reveal" style="transition-delay:.1s">Two stores. Fresh drops. Premium menswear. Open every day.</p>
+  <div class="cta-acts reveal" style="transition-delay:.2s">
+    <a href="tel:+919741835959" class="btn-p">☎ &nbsp;Call +91 97418 35959</a>
+    <a href="https://maps.google.com/?cid=4648289653954477749" target="_blank" class="btn-g">Get Directions →</a>
+    <a href="https://www.instagram.com/leofashion.official/" target="_blank" class="btn-g">Instagram →</a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="ftop">
+    <div>
+      <div class="flogo-row"><span class="flogo-mars">♂</span><span class="flogo-txt">LEO FASHIONS</span></div>
+      <p class="ftagline">Bengaluru's premium menswear destination. Two stores. Fresh drops every week.</p>
+      <div class="fsoc">
+        <a href="https://www.instagram.com/leofashion.official/" target="_blank" class="fsb" aria-label="Instagram">◈</a>
+        <a href="tel:+919741835959" class="fsb" aria-label="Call">☎</a>
+        <a href="https://maps.google.com/?cid=4648289653954477749" target="_blank" class="fsb" aria-label="Maps">📍</a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h5>Shop</h5>
+      <ul>
+        <li><a href="#">T-Shirts & Graphic Tees</a></li>
+        <li><a href="#">Premium Hoodies</a></li>
+        <li><a href="#">Rare Rabbit</a></li>
+        <li><a href="#">Footwear</a></li>
+        <li><a href="#">Formal Shirts</a></li>
+        <li><a href="#">Puff Jackets</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Info</h5>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#branches">Our Stores</a></li>
+        <li><a href="#fomo">Latest Drops</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="https://www.instagram.com/leofashion.official/" target="_blank">Instagram</a></li>
+        <li><a href="tel:+919741835959">Contact</a></li>
+      </ul>
+    </div>
+    <div class="fcol fnl">
+      <h5>Stay Updated</h5>
+      <p>Get notified about new drops, exclusive offers, and style tips from Leo Fashions.</p>
+      <div class="nlf">
+        <input type="email" class="nli" placeholder="your@email.com" aria-label="Email address"/>
+        <button class="nlb" type="button">Join</button>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span class="fcopy">© 2025 LEO Fashions, Bengaluru. All rights reserved.</span>
+    <div class="flinks">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="tel:+919741835959">+91 97418 35959</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.cssText+=`;left:${mx}px;top:${my}px`});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.cssText+=`;left:${rx}px;top:${ry}px`;requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.cc,.pc,.bcard,.tcard,.drow,.stat').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+
+/* STICKY NAV */
+const navEl=document.getElementById('nav'),abar=document.getElementById('abar');
+const setNavTop=()=>{ navEl.style.top=window.scrollY>80?'0':abar.offsetHeight+'px'; };
+navEl.style.transition='background .5s,border-color .5s,height .3s,top .4s ease';
+setNavTop();
+window.addEventListener('scroll',()=>{
+  navEl.classList.toggle('sticky',window.scrollY>60);
+  if(window.scrollY>80){abar.style.transform='translateY(-100%)';}
+  else{abar.style.transform='translateY(0)';setNavTop();}
+},{passive:true});
+
+/* MOBILE MENU */
+const hamBtn=document.getElementById('hamBtn'),mmenu=document.getElementById('mmenu');
+let mopen=false;
+hamBtn.addEventListener('click',()=>{
+  mopen=!mopen;mmenu.classList.toggle('open',mopen);
+  hamBtn.setAttribute('aria-expanded',mopen);
+  document.body.style.overflow=mopen?'hidden':'';
+});
+document.querySelectorAll('.mmenu a').forEach(a=>a.addEventListener('click',()=>{
+  mopen=false;mmenu.classList.remove('open');hamBtn.setAttribute('aria-expanded','false');document.body.style.overflow='';
+}));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&mopen)hamBtn.click(); });
+
+/* SCROLL REVEAL */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* SMOOTH SCROLL */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+</script>
+</body>
+</html>
